@@ -4,7 +4,7 @@
 
 ![Example Gif](media/example.gif)
 
-This cheatsheet is a TL;DR for the things covered in the tutorial: <> for scripting with Lua for OBS Studio and adding sources. 
+This cheatsheet is a TL;DR for the things covered in the [lua scripting tutorial I created](https://morebackgroundsplease.medium.com/use-a-lua-script-to-import-your-twitch-streaming-overlay-designs-into-obs-studio-b8f688aeb9e8) for scripting with Lua for OBS Studio and adding scenes and importing overlays, images, and text.
 
 For an example code of the some of the functions used below please go here: [Example Code](Final/getting_start_with_lua_script.lua)
 
