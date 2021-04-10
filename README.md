@@ -1,5 +1,9 @@
 # Cheat Sheet for Creating Scenes and Scene Items Functions
 
+## Using a custom interface with a simple Lua Script inside OBS Studio
+
+![Example Gif](media/example.gif)
+
 This cheatsheet is a TL;DR for the things covered in the tutorial: <> for scripting with Lua for OBS Studio and adding sources. 
 
 For an example code of the some of the functions used below please go here: [Example Code](Final/getting_start_with_lua_script.lua)
@@ -11,7 +15,7 @@ Please also refer to upgradeQ's Python scripting Cheatsheet here, as it may cont
 - [Setting Keys](#setting-keys)
 - [Ffmpeg_source Setting Keys](#ffmpeg_source-setting-keys)
 - [Image_source Setting Keys](#image_source-setting-keys)
-- [Text-gdiplus Setting Keys](#text_gdiplus_setting_keys)
+- [Text_gdiplus Setting Keys](#text_gdiplus_setting_keys)
 - [Color_filter Setting Keys](#color-filter-setting-keys)
 - [Source Creation Functions](#source-creation-functions)
 - [Scene Exists Function](#scene-exists-function)
@@ -48,7 +52,7 @@ Please also refer to upgradeQ's Python scripting Cheatsheet here, as it may cont
 | "flags" | int | obs.obs_data_set_int() |
 | "size" | int | obs.obs_data_set_int() |
 | "style" | string | obs.obs_data_set_string() |
-| font | object | obs.obs_data_set_obj() |
+| "font" | object | obs.obs_data_set_obj() |
 | "text" | string | obs.obs_data_set_string() |
 | "align" | string | obs.obs_data_set_string() |
 | "color" | int | obs.obs_data_set_int() |
