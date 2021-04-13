@@ -16,13 +16,11 @@ For more resources definitely check out the amazing group of devs over at the Wi
 
 # Table Of Contents
 - [Image to Base64 Converter](#image-to-base64-converter)
-
 - [Setting Keys](#setting-keys)
 - [Ffmpeg_source Setting Keys](#ffmpeg_source-setting-keys)
 - [Image_source Setting Keys](#image_source-setting-keys)
 - [Text_gdiplus Setting Keys](#text_gdiplus_setting_keys)
 - [Color_filter Setting Keys](#color-filter-setting-keys)
-
 - [Source Creation Functions](#source-creation-functions)
 - [Scene Exists Function](#scene-exists-function)
 - [Create Scene Function](#create-scene-function)
@@ -30,13 +28,10 @@ For more resources definitely check out the amazing group of devs over at the Wi
 - [Create Image Function](#create-image-function)
 - [Create Text Function](#create-text-function)
 - [Create Color Filter Function](#create-color-filter-function)
-
 - [Import All Scenes Function](#import-all-scenes-function)
-
 - [OBS Lua Library Methods](#obs-lua-library-methods)
 - [Initiate The OBS Lua Library](#initiate-the-obs-lua-library)
 - [Get The Script Path](#get-the-script-path)
-
 - [Useful Scene Methods](#useful-scene-methods)
 - [Get All The Scene Names](#get-all-the-scene-names)
 - [Create A New Scene Object And Release The Scene Object](#create-a-new-scene-object-and-release-the-scene-object)
@@ -45,7 +40,6 @@ For more resources definitely check out the amazing group of devs over at the Wi
 - [Set The Current Viewed Scene Inside OBS](#set-the-current-viewed-scene-inside-obs)
 - [Get The Scene Context From A Scene](#get-the-scene-context-from-a-scene)
 - [Release A Scene Object](#release-a-scene-object)
-
 - [Useful Source Methods](#useful-source-methods)
 - [Create A Data Settings Object](#create-a-data-settings-object)
 - [Set A String Key](#set-a-string-key)
@@ -62,7 +56,6 @@ For more resources definitely check out the amazing group of devs over at the Wi
 - [Release The Settings Object](#release-the-settings-object)
 - [Release A Source Object](#release-a-source-object)
 - [Get A List Of All The Scenes Created In OBS In Source Object Form](#get-a-list-of-all-the-sccenes-created-in-obs-in-source-object-form)
-
 - [Useful Properties Methods](#useful-properties-methods)
 - [Create A Properties Object](#create-a-properties-object)
 - [Create A Button](#create-a-button)
