@@ -512,7 +512,7 @@ local scale = obs.vec2()
 scale.x = 1
 scale.y = 0.5
 
-obs.obs_sceneotem_set_scale(sceneitem_object, scale)
+obs.obs_sceneitem_set_scale(sceneitem_object, scale)
 ```
 
 ## Release The Settings Object
