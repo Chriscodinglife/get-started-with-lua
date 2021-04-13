@@ -10,7 +10,7 @@ For an example code of the some of the functions used below please go here: [Exa
 
 Please also refer to upgradeQ's Python scripting Cheatsheet here, as it may contain similar items written in Python: [upgradeQ's Python Cheat Sheet](https://github.com/upgradeQ/OBS-Studio-Python-Scripting-Cheatsheet-obspython-Examples-of-API#using-classes)
 
-For more resource check out
+For more resources definitely check out the amazing group of devs over at the Wiki and the official OBS scripting documentation here:
 - [The OBS Getting Started Wiki](https://obsproject.com/wiki/Getting-Started-With-OBS-Scripting)
 - [The Official OBS Scripting Documentation](https://obsproject.com/docs/scripting.html)
 
