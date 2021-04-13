@@ -114,7 +114,6 @@ function create_text(face, size, style, text, align, name, new_scene, scene, x, 
 	local scale = obs.vec2()
 
 	local text_settings = obs.obs_data_create()
-	local text_settings = obs.obs_data_create()
 	local text_font_object = obs.obs_data_create_from_json('{}')
 	obs.obs_data_set_string(text_font_object, "face", face)
 	obs.obs_data_set_int(text_font_object, "flags", 0)

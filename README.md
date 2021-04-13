@@ -1,6 +1,6 @@
-# Cheat Sheet for Creating Scenes and Scene Items Functions
+# Cheat Sheet for Creating Scenes and Scene Items Functions in Lua
 
-## Using a custom interface with a simple Lua Script inside OBS Studio
+## Creating A Custom Interface With A Simple Lua Script Inside OBS Studio
 
 ![Example Gif](media/example.gif)
 
@@ -14,13 +14,15 @@ For more resources definitely check out the amazing group of devs over at the Wi
 - [The OBS Getting Started Wiki](https://obsproject.com/wiki/Getting-Started-With-OBS-Scripting)
 - [The Official OBS Scripting Documentation](https://obsproject.com/docs/scripting.html)
 
-# Table of content
+# Table Of Contents
 - [Image to Base64 Converter](#image-to-base64-converter)
+
 - [Setting Keys](#setting-keys)
 - [Ffmpeg_source Setting Keys](#ffmpeg_source-setting-keys)
 - [Image_source Setting Keys](#image_source-setting-keys)
 - [Text_gdiplus Setting Keys](#text_gdiplus_setting_keys)
 - [Color_filter Setting Keys](#color-filter-setting-keys)
+
 - [Source Creation Functions](#source-creation-functions)
 - [Scene Exists Function](#scene-exists-function)
 - [Create Scene Function](#create-scene-function)
@@ -28,7 +30,43 @@ For more resources definitely check out the amazing group of devs over at the Wi
 - [Create Image Function](#create-image-function)
 - [Create Text Function](#create-text-function)
 - [Create Color Filter Function](#create-color-filter-function)
+
 - [Import All Scenes Function](#import-all-scenes-function)
+
+- [OBS Lua Library Methods](#obs-lua-library-methods)
+- [Initiate The OBS Lua Library](#initiate-the-obs-lua-library)
+- [Get The Script Path](#get-the-script-path)
+
+- [Useful Scene Methods](#useful-scene-methods)
+- [Get All The Scene Names](#get-all-the-scene-names)
+- [Create A New Scene Object And Release The Scene Object](#create-a-new-scene-object-and-release-the-scene-object)
+- [Get The Source Of A Specific Scene](#get-the-source-of-a-specific-scene)
+- [Get The Source Of The Current Viewed/Selected Scene](#get-the-source-of-the-current-viewed/selected-scene)
+- [Set The Current Viewed Scene Inside OBS](#set-the-current-viewed-scene-inside-obs)
+- [Get The Scene Context From A Scene](#get-the-scene-context-from-a-scene)
+- [Release A Scene Object](#release-a-scene-object)
+
+- [Useful Source Methods](#useful-source-methods)
+- [Create A Data Settings Object](#create-a-data-settings-object)
+- [Set A String Key](#set-a-string-key)
+- [Set A Bool Key](#set-a-bool-key)
+- [Create A Blank Object Value Array](#create-a-blank-object-value-array)
+- [Set An Object Key](#set-an-object-key)
+- [Create A Source Object And Release It](#create-a-source-object-and-release-it)
+- [Update The Settings Of Your Source](#update-the-settings-of-your-source)
+- [Add A Source Object To A Scene](#add-a-source-object-to-a-scene)
+- [Create An OBS Vector](#create-an-obs-vector)
+- [Get The Scene Item From A Scene](#get-the-scene-item-from-a-scene)
+- [Set The Position Of A Scene Item](#set-the-position-of-a-scene-item)
+- [Set The Scale Of A Scene Item](#set-the-scale-of-a-scene-item)
+- [Release The Settings Object](#release-the-settings-object)
+- [Release A Source Object](#release-a-source-object)
+- [Get A List Of All The Scenes Created In OBS In Source Object Form](#get-a-list-of-all-the-sccenes-created-in-obs-in-source-object-form)
+
+- [Useful Properties Methods](#useful-properties-methods)
+- [Create A Properties Object](#create-a-properties-object)
+- [Create A Button](#create-a-button)
+
 
 # Image To Base64 Converter
 [Converter](https://www.base64-image.de/)
@@ -188,7 +226,6 @@ function create_text(face, size, style, text, align, name, new_scene, scene, x, 
 	local scale = obs.vec2()
 
 	local text_settings = obs.obs_data_create()
-	local text_settings = obs.obs_data_create()
 	local text_font_object = obs.obs_data_create_from_json('{}')
 	obs.obs_data_set_string(text_font_object, "face", face)
 	obs.obs_data_set_int(text_font_object, "flags", 0)
@@ -264,4 +301,271 @@ function import_all_scenes()
     end
 
 end
+```
+
+# OBS Lua Library Methods
+
+Below covers some of the library methods I used in my tutorial. There are definitely plenty more and you can find them referring to the C documentation in the [OBS Documentation](https://obsproject.com/docs/index.html)
+
+## Initiate the OBS Lua library
+
+```lua
+obs = obslua
+```
+
+## Get The Script Path
+
+This is useful in returning the location of your script on your local machine. You can use this to make relative paths to files located near your script such as a folder with your overlays.
+
+```lua
+script_path()
+```
+
+# Useful Scene Methods 
+
+Use the following methods I commonly used in my tutorial for creating and editing scenes.
+
+## Get All The Scene Names
+
+This will return a list of all the names of your scenes created inside OBS.
+
+```lua
+list_of_scene_names = obs.obs_frontend_get_scene_names()
+```
+
+## Create A New Scene Object And Release The Scene Object
+
+Add a New Scene into OBS using this method, make sure to release the reference to the scene after.
+
+The release method will only expect a scene object.
+
+```lua
+scene_name = "My New Scene"
+
+local scene_object = obs.obs_scene_create(scene_name) -- This will create your scene object and make your new scene appear inside OBS
+
+obs.obs_scene_release(scene_object)
+```
+
+## Get The Source Of A Specific Scene
+
+A scene can also be considered a source. So to return the scene as a source object do the following:
+
+```lua
+obs.obs_scene_get_source(scene_object)
+```
+
+## Get the Source of the Current Viewed/Selected Scene
+
+Do the following to get the source object of the currently selected scene inside OBS:
+
+```lua
+local current_scene = obs.obs_frontend_get_current_scene()
+```
+
+## Set The Current Viewed Scene Inside OBS
+
+This method expects a source object instead of a scene object. So use the obs_scene_get_source method to get the source from a scene.
+
+```lua
+obs.obs_frontend_set_current_scene(obs.obs_scene_get_source(scene_object))
+```
+
+## Get The "Scene Context" From A Scene
+
+This is different from obs_scene_get_source because scene_get_source returns the scene's source object. This returns the window or context of what the scene consists of.
+
+```lua
+local scene_context = obs.obs_scene_from_source(source_object)
+```
+
+## Release A Scene Object
+
+Do this after creating a Scene Object
+
+```lua
+obs.obs_Scene_release(scene_object)
+```
+
+# Useful Source Methods
+
+The following covers methods related around creating sources within a scene, which can also be known as sceneitems. Sceneitems have properties or settings that can set by using specific methods for editing various setting keys. In my tutorial I go over a few source types, but the following can be applied generally to all types of sources.
+
+## Create A Data Settings Object
+
+After creating your data settings object, make sure to release it.
+
+```lua
+local settings_object = obs.obs_data_create()
+
+obs.obs_data_release(settings_object)
+```
+
+## Set A String Key
+
+In this example we will set the "local_file" string key for a source type "ffmpeg_source"
+
+```lua
+local file_path = path/to/a/video
+
+obs.obs_data_set_string(settings_object, "local_file", file_path)
+```
+
+## Set A Bool Key
+
+For this example we will set the "looping" bool key for a source type "ffmpeg_source". The following method will expect three input parameters, the last one being a bool of either true or false.
+
+```lua
+obs.obs_data_set_bool(settings_object, "looping", true)
+```
+
+## Create A Blank Object Value Array
+
+```lua
+local blank_object = obs.obs_data_create_from_json('{}')
+```
+
+## Set An Object Key
+
+Object Keys are Keys that expect an Array of values instead of just one value. This method is useful for when you have to set the font. Below is an example of how to set the "font" key for a source type of "text_gdiplus" or basically a text source:
+
+```lua
+local settings_object = obs.obs_data_create()
+
+local font_object = obs.obs_data_create_from_json('{}')
+
+obs.obs_data_set_string(font_object, "face", face)
+obs.obs_data_set_int(font_object, "flags", 0)
+obs.obs_data_set_int(font_object, "size", size)
+obs.obs_data_set_string(font_object, "style", style)
+
+obs.obs_data_set_obj(settings_object, "font", text_font_object)
+```
+
+## Create A Source Object And Release It
+
+It is a good idea to create your source object after you have created your settings object. Your Settings object will be used as an input paramater for creating the source object.
+
+The following method will expect 4 input parameters: the type of source, a string value for name, the settings object, and hotkeydata. We will not be inputting any hotkey data so we will leave this as nil, or basically null.
+
+This example will show how to create a source type of "ffmpeg_source". Always make sure to release your data settings object and your source object.
+
+```lua
+local settings_object = obs.obs_data_create()
+local file_path = path/to/a/video
+local name = "my_source_name"
+
+obs.obs_data_set_string(settings_object, "local_file", script_path() .. file_path)
+obs.obs_data_set_bool(settings_object, "looping", true)
+
+local source_object = obs.obs_source_create("ffmpeg_source", name, settings_object, nil)
+
+obs.obs_data_release(settings_object)
+obs.obs_source_release(source_object)
+
+```
+
+## Update the Settings Of Your Source
+
+It is a good idea to always update your source settings with any key you have set. Do the following:
+```lua
+obs.obs_source_update(source_object, settings_object)
+```
+
+## Add A Source Object To A Scene
+
+After you succesfully created your source object, you can add it to your scene like so:
+
+```lua
+obs.obs_scene_add(scene_object, source_object)
+```
+
+## Create an OBS Vector
+
+This is useful for whenever you have to set a value for position or scale. 
+
+```lua
+local position = obs.vec2()
+```
+
+## Get The Scene Item From A Scene
+
+In order to edit or change the position or scale of a Source Object in a scene, you need to call it as a scene item. The following method will expect a scene object, and the name given to your source that you added to your scene. To get the scene item from a source do:
+
+```lua
+local sceneitem_object = obs.obs_scene_find_source(scene_object, name)
+```
+
+## Set The Position Of A Scene Item
+
+Position is based on x,y coordinates in pixels, with the top left corner of the OBS Stream Viewer being 0,0. The following method will expect the sceneitem object and a vector for position x and position y.
+
+```lua
+local position = obs.vec2()
+
+position.x = 25
+position.y = 25
+
+obs.obs_sceneitem_set_pos(sceneitem_object, position)
+```
+
+## Set The Scale Of A Scene Item
+
+Scale is based on a scalar percentage of your original source's size. If you were to have a 1920 by 1080 video, then 1 would be 100% of your video's scale, and 0.5 being half the size. Use the following method to set your size of your source. Note that the Scale needs to be a vector, so create a vector first:
+
+```lua
+local scale = obs.vec2()
+
+scale.x = 1
+scale.y = 0.5
+
+obs.obs_sceneotem_set_scale(sceneitem_object, scale)
+```
+
+## Release The Settings Object
+
+```lua
+obs.obs_data_release(settings_object)
+```
+
+## Release A Source Object
+
+```lua
+obs.obs_source_release(source_object)
+
+```
+
+## Get A List Of All The Available Source Objects From The Scenes Created In OBS
+
+This is useful if you want to retrieve a full list of all scenes in the form of source objects you made inside OBS. Always make sure to release your source objects as well. Please don't confuse this as a list of all the sceneitems you have in your scene.
+
+```lua
+local scene_list = obs.obs_front_end_get_scenes()
+
+for i, scene in ipairs(scene_list) do
+    obs.obs_source_release(scene)
+end
+```
+
+# Useful Properties Methods
+
+## Create A Properties Object
+
+Here is where you can create and add cool menu items, buttons, and sliders into your script. You start with first creating the actual properties object that will contain all your cool stuff.
+
+```lua
+local properties_object = obs.obs_properties_create()
+```
+
+## Create A Button
+
+This will show how to add a button to your UI by incorporating it into your properties object. This method will expect 4 input parameters which are your properties object, a name, the actual displayed text, and a callback function. In the example below I have a "welcome_scene_function" function that will act as my callback function. Please note that I intentionally left this function blank
+
+```lua
+function welcome_scene_function)
+end
+
+local properties_object = obs.obs_properties_create()
+
+local welcome_button = obs.obs_properties_add_button(properties_object, "welcome_button", "Welcome!", welcome_scene_function)
 ```
