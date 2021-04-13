@@ -528,7 +528,7 @@ obs.obs_source_release(source_object)
 
 ```
 
-## Get A List Of All The Available Source Objects From The Scenes Created In OBS
+## Get A List Of All The Scenes Created In OBS In Source Object Form
 
 This is useful if you want to retrieve a full list of all scenes in the form of source objects you made inside OBS. Always make sure to release your source objects as well. Please don't confuse this as a list of all the sceneitems you have in your scene.
 
